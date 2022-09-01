@@ -18,6 +18,9 @@ public class Menu extends AppCompatActivity {
     FragmentTransaction cambiarFragment;
     Fragment fragmentListado,fragmentJugar;//instanciar el resto de fragments
     ImageButton buttonListado,buttonJugar;//revisar si se quedan como image button o button normal
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
