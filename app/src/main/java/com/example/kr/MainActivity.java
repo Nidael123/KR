@@ -29,14 +29,14 @@ public class MainActivity extends AppCompatActivity {
         nuevabase = new create(this,"bd_kanji",null,2);
         bd = nuevabase.getWritableDatabase();
         //llenar la base desde la pagina web
-        campos.put("id_kanji",1);
-        campos.put("kanji","ー");
-        Long ingreso = bd.insert("kanji","id_kanji",campos);
-        Toast.makeText(getApplicationContext(), "ingreso = "+ingreso, Toast.LENGTH_SHORT).show();
-        campos.put("id_kanji",2);
-        campos.put("kanji","二");
-        ingreso = bd.insert("kanji","id_kanji",campos);
-        Toast.makeText(getApplicationContext(), "ingreso = "+ingreso, Toast.LENGTH_SHORT).show();
+        //campos.put("id_kanji",1);
+        //campos.put("kanji","ー");
+        //Long ingreso = bd.insert("kanji","id_kanji",campos);
+        //Toast.makeText(getApplicationContext(), "ingreso = "+ingreso, Toast.LENGTH_SHORT).show();
+        //campos.put("id_kanji",2);
+        //campos.put("kanji","二");
+        //ingreso = bd.insert("kanji","id_kanji",campos);
+        //Toast.makeText(getApplicationContext(), "ingreso = "+ingreso, Toast.LENGTH_SHORT).show();
         //cabiar arriba por los datos de llegada de la base
 
 

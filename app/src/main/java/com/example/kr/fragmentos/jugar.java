@@ -1,5 +1,7 @@
 package com.example.kr.fragmentos;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,12 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.kr.MainActivity;
+import com.example.kr.Menu;
 import com.example.kr.R;
+import com.example.kr.activity_jugar;
 
 
 public class jugar extends Fragment {
 
     Button play;
+    View vista;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,7 +66,16 @@ public class jugar extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_jugar, container, false);
+        // crear la vista igualarla a return por default y desde aqui trabajo igual que activity añadiendo la vista
+        //no olvidar retornar la vista
+        vista = inflater.inflate(R.layout.fragment_jugar, container, false);
+        play = vista.findViewById(R.id.btn_play);
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(vista.getContext(), activity_jugar.class));
+            }
+        });
+        return  vista;
     }
 }

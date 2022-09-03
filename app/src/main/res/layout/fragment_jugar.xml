@@ -17,7 +17,7 @@
             android:text="Jugar" />
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/btn_play"
             android:layout_width="match_parent"
             android:layout_height="74dp"
             android:text="jugar" />

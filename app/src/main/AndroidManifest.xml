@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KR">
         <activity
+            android:name=".activity_jugar"
+            android:exported="false" />
+        <activity
             android:name=".vocabularioKanji"
             android:exported="false"
             android:label="@string/title_activity_vocabulario_kanji"
