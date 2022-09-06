@@ -74,6 +74,7 @@ public class jugar extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(vista.getContext(), activity_jugar.class));
+                getActivity().onBackPressed();
             }
         });
         return  vista;
