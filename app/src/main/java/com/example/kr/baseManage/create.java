@@ -22,4 +22,6 @@ public class create extends SQLiteOpenHelper {
         datebase.execSQL("drop table if exists table_kanji ");//borro las tablas en el caso de existir
         onCreate(datebase);
     }
+
+
 }

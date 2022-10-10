@@ -27,22 +27,23 @@ public class activity_jugar extends AppCompatActivity {
     TextView txtkanji;
     create nuevabase;
     ArrayList<objetoskanji> list_kanjis;
+
     int place;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jugar);
         list_kanjis = new ArrayList<objetoskanji>();
-        place = 0;
-        nuevabase = new create(this,"bd_kanji",null,2);
+
+        nuevabase = new create(this,"bd_kanji",null,1);
         btn_next = findViewById(R.id.btn_sgt);
         btn_preview = findViewById(R.id.btn_ant);
         btn_finish = findViewById(R.id.btn_finish);
         txtkanji = findViewById(R.id.txt_prueba);
         carga_kanjis();
         //generar las funciones para que cambien entre los diferentes kanjis
-        txtkanji.setText(list_kanjis.get(0).getKanji());
-
+        //txtkanji.setText(list_kanjis.get(0).getKanji());
+        place = 0;
         btn_preview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,8 +105,6 @@ public class activity_jugar extends AppCompatActivity {
                 Log.d("for","kanji:" + cursor.getString(i));
                 cursor.moveToNext();
             }
-
-
             //Log.d("kanji","kanji:" + cursor.getCount());
 
             //Toast.makeText(getApplicationContext(), "kanji:" + cursor.getString(0), Toast.LENGTH_LONG).show();

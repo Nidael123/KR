@@ -14,4 +14,8 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_kanjis">kanjis</string>
+
+    <!--LINKS-->
+    <string name="api_kanjis">https://kanjiremaind.000webhostapp.com/Controller/Api/api_kanjis.php</string>
 </resources>
