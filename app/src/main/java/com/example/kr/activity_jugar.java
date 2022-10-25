@@ -94,17 +94,24 @@ public class activity_jugar extends AppCompatActivity {
         objetoskanji ingresokanji;
         ingresokanji = new objetoskanji();
         SQLiteDatabase db = nuevabase.getReadableDatabase();
+        Log.d("for","kanji:LLL");
         try {
             //hacer el bucle para llenbar el arraylist
-            Cursor cursor = db.rawQuery("select * from kanji", null);
+            Cursor cursor = db.rawQuery("select id_kanji,kanji from kanji", null);
             cursor.moveToFirst();
-            for (int i = 0;i <= cursor.getCount();i++  ) {
+            Log.d("for","cantidad:" + cursor.getCount());
+            while(cursor.moveToNext())
+            {
+                Log.d("kanjisguardados",cursor.getString(0));
+            }/*
+            for (int i = 0;i >= cursor.getCount()-1;i++) {
                 ingresokanji.setId_kanji(cursor.getInt(i));
                 ingresokanji.setKanji(cursor.getString(i));
-                list_kanjis.add(ingresokanji);
                 Log.d("for","kanji:" + cursor.getString(i));
-                cursor.moveToNext();
-            }
+                list_kanjis.add(ingresokanji);
+                Log.d("i","i:" + i);
+                cursor.move(i);
+            }*/
             //Log.d("kanji","kanji:" + cursor.getCount());
 
             //Toast.makeText(getApplicationContext(), "kanji:" + cursor.getString(0), Toast.LENGTH_LONG).show();
@@ -112,7 +119,7 @@ public class activity_jugar extends AppCompatActivity {
 
         }
         catch (Exception e){
-
+            Log.d("V","V" + e.toString());
             Toast.makeText(getApplicationContext(), "error"+e.toString(), Toast.LENGTH_LONG).show();
         }
     }
