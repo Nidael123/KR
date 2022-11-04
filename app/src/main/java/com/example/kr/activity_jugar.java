@@ -35,7 +35,7 @@ public class activity_jugar extends AppCompatActivity {
         setContentView(R.layout.activity_jugar);
         list_kanjis = new ArrayList<objetoskanji>();
 
-        nuevabase = new create(this,"bd_kanji",null,1);
+        nuevabase = new create(this,"bd_kanji",null,2);
         btn_next = findViewById(R.id.btn_sgt);
         btn_preview = findViewById(R.id.btn_ant);
         btn_finish = findViewById(R.id.btn_finish);
@@ -91,6 +91,7 @@ public class activity_jugar extends AppCompatActivity {
 
     public void carga_kanjis()
     {
+        int r=1;
         objetoskanji ingresokanji;
         ingresokanji = new objetoskanji();
         SQLiteDatabase db = nuevabase.getReadableDatabase();
@@ -98,15 +99,29 @@ public class activity_jugar extends AppCompatActivity {
         try {
             //hacer el bucle para llenbar el arraylist
             Cursor cursor = db.rawQuery("select id_kanji,kanji from kanji", null);
-            cursor.moveToFirst();
+
             Log.d("for","cantidad:" + cursor.getCount());
-            while(cursor.moveToNext())
+            //Nos aseguramos de que existe al menos un registro
+            if (cursor.move(r)) {
+                //Recorremos el cursor hasta que no haya más registros
+                do {
+                    r++;
+                    ingresokanji.setId_kanji(cursor.getInt(0));
+                    ingresokanji.setKanji(cursor.getString(1));
+                    //list_kanjis.add(ingresokanji);
+                    llenararray(cursor.getInt(0),cursor.getString(1));
+                    Log.d("dowhiole",cursor.getString(1));
+                } while(cursor.moveToNext());
+            }
+            else Log.d("dowhiole","nmo hay data");
+            /*while(cursor.moveToNext())
             {
-                Log.d("kanjisguardados",cursor.getString(0));
+                ingresokanji.setId_kanji(cursor.getInt(0));
+                ingresokanji.setKanji(cursor.getString(1));
+                Log.d("kanjisguardados",cursor.getString(1));
             }/*
             for (int i = 0;i >= cursor.getCount()-1;i++) {
-                ingresokanji.setId_kanji(cursor.getInt(i));
-                ingresokanji.setKanji(cursor.getString(i));
+
                 Log.d("for","kanji:" + cursor.getString(i));
                 list_kanjis.add(ingresokanji);
                 Log.d("i","i:" + i);
@@ -122,5 +137,15 @@ public class activity_jugar extends AppCompatActivity {
             Log.d("V","V" + e.toString());
             Toast.makeText(getApplicationContext(), "error"+e.toString(), Toast.LENGTH_LONG).show();
         }
+
+
+    }
+
+    public  void  llenararray(int id, String kanji)
+    {
+        objetoskanji kj = new objetoskanji();
+        kj.setId_kanji(id);
+        kj.setKanji(kanji);
+        list_kanjis.add(kj);
     }
 }

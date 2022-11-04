@@ -15,7 +15,11 @@
             android:id="@+id/txt_prueba"
             android:layout_width="match_parent"
             android:layout_height="213dp"
-            android:text="TextView" />
+            android:padding="40dp"
+            android:paddingStart="40dp"
+            android:paddingLeft="40dp"
+            android:text="TextView"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_sgt"

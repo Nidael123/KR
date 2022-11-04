@@ -53,27 +53,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         campos = new ContentValues();
-        nuevabase = new create(this,"bd_kanji",null,1);
+        nuevabase = new create(this,"bd_kanji",null,2);
         bd = nuevabase.getWritableDatabase();
         urlusurio = getString(R.string.api_kanjis);
-        //llenar la base desde la pagina web
-        //campos.put("id_kanji",1);
-        //campos.put("kanji","ー");
-        //Long ingreso = bd.insert("kanji","id_kanji",campos);
-        //Toast.makeText(getApplicationContext(), "ingreso = "+ingreso, Toast.LENGTH_SHORT).show();
-        //campos.put("id_kanji",2);
-        //campos.put("kanji","二");
-        //ingreso = bd.insert("kanji","id_kanji",campos);
-        //Toast.makeText(getApplicationContext(), "ingreso = "+ingreso, Toast.LENGTH_SHORT).show();
-        //cabiar arriba por los datos de llegada de la base
-
         lisdkanji = new ArrayList<>();
 
         start = (Button) findViewById(R.id.btn_start);
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                //cargar_kanji();
+                cargar_kanji();
             }
         });
         start.setOnClickListener(new View.OnClickListener() {
@@ -98,13 +87,23 @@ public class MainActivity extends AppCompatActivity {
                         kj.setKanji(jsonObject.getString("kanji").toString());
                         kj.setId_kanji(Integer.parseInt(jsonObject.getString("id_kanji").toString()));
                         lisdkanji.add(kj);
+                        /*llenado de la base de datos */
+                        campos.put("id_kanji",Integer.parseInt(jsonObject.getString("id_kanji").toString()));
+                        campos.put("kanji",jsonObject.getString("kanji").toString());
+                        campos.put("nivel",0);
+                        campos.put("sig_ingle",jsonObject.getString("ingles").toString());
+                        campos.put("sig_español",jsonObject.getString("significado").toString());
+                        campos.put("id_tipo",jsonObject.getString("id_tipo").toString());
+
+                        Log.d("error al consultar",jsonObject.getString("kanji").toString());
+                        Long ingreso = bd.insert("kanji","id_kanji",campos);
+                        Toast.makeText(getApplicationContext(), "ingreso = "+lisdkanji.get(i).getId_kanji(), Toast.LENGTH_SHORT).show();
                         Log.d("main activity",kj.getKanji()+":"+kj.getId_kanji() );
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 Log.d("tamaño de lista","es:"+lisdkanji.size());
-                llenarbase();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -115,19 +114,5 @@ public class MainActivity extends AppCompatActivity {
         });
         n_requeriminto = Volley.newRequestQueue(this);
         n_requeriminto.add(jsonObjectRequest);
-    }
-    public void llenarbase()
-    {
-        //Log.d("tamaño de lista","es:"+lisdkanji.size());
-        for (int i =0;i <= lisdkanji.size()-1;i++  ) {
-            campos.put("id_kanji",lisdkanji.get(i).getId_kanji());
-            campos.put("kanji",lisdkanji.get(i).getKanji());
-            Long ingreso = bd.insert("kanji","id_kanji",campos);
-            Toast.makeText(getApplicationContext(), "ingreso = "+ingreso, Toast.LENGTH_SHORT).show();
-        }
-        //campos.put("id_kanji",lisdkanji.get));
-        //campos.put("kanji",jsonObject.getString("kanji"));
-        //Long ingreso = bd.insert("kanji","id_kanji",campos);
-        //Toast.makeText(getApplicationContext(), "ingreso = "+ingreso, Toast.LENGTH_SHORT).show();
     }
 }
